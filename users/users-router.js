@@ -3,6 +3,8 @@ const Users = require('./users-model')
 const bc = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+
+// Registers a user
 router.post('/register', (req,res)=>{
     let user = req.body;
 
@@ -11,6 +13,7 @@ router.post('/register', (req,res)=>{
 
     Users.add(user)
     .then(saved =>{
+        console.log(saved)
         const newUser = {...saved, password: 'No password for you!'}
         res.status(201).json(newUser)
     })
@@ -19,6 +22,7 @@ router.post('/register', (req,res)=>{
     })
 });
 
+// logs in a user
 router.post('/login', (req, res) => {
     let { username, password } = req.body;
   
@@ -38,6 +42,8 @@ router.post('/login', (req, res) => {
           });
   });
 
+
+  // Gets all users 
   router.get('/', (req, res) => {
     Users.find()
     .then(users => {
@@ -48,6 +54,8 @@ router.post('/login', (req, res) => {
     });
   });
 
+
+  // Gets user by id 
   router.get('/:id', (req,res)=>{
     Users.findById(req.params.id)
     .then(user=>{
@@ -59,6 +67,8 @@ router.post('/login', (req, res) => {
     })
 })
 
+
+// Removes a user by id 
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
   
@@ -75,6 +85,8 @@ router.delete('/:id', (req, res) => {
     });
   });
 
+
+  // Generates JWT
   function generateToken(user){
     const payload = {
         username: user.username,
