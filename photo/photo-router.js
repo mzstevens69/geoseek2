@@ -29,14 +29,17 @@ router.get('/:gemId', async (req, res, next) => {
     res.json(photos)
 });
 
-router.post('/add', upload.single('photo'), async (req, res, next) => {
+
+
+
+router.post('/add/gemId', upload.single('photo'), async (req, res, next) => {
     try {
         console.log(req.params)
         const path = req.file.path
         const { name, description } = req.body
         const entry = await photoModel.createPhoto({
             name,
-            // gem_id: req.params.gemId, NEEDS SEED DATA FOR THIS TO WORK
+            gem_id: req.params.gemId, //NEEDS SEED DATA FOR THIS TO WORK
             description,
             photo_url: path
         })
@@ -90,20 +93,4 @@ router.delete('/delete/:id', async (req, res, next) => {
 
 module.exports = router
 
-    // router.post('/add/:gemId', upload.single('photo'), async (req, res, next) => {
-    //     try {
-    //         console.log(req.params)
-    //         const path = req.file.path
-    //         const { name, description } = req.body
-    //         const entry = await photoModel.create({
-    //             name,
-    //             // gem_id: req.params.gemId,
-    //             description,
-    //             photo_url: path
-    //         })
-    //         res.json(entry)
-    //     } catch (ex) {
-    //         console.log(ex)
-    //         res.status(400).send({error: ex })
-    //     }
-    // });
+    
