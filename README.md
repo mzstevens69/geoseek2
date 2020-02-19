@@ -8,7 +8,7 @@
 
 #### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
@@ -28,9 +28,7 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
-
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+## Endpoints
 
 #### User Routes
 
@@ -63,9 +61,7 @@ To get the server running locally:
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ Users
+#### Users
 
 ---
 
