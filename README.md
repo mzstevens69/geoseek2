@@ -52,42 +52,73 @@ To get the server running locally:
 | PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
 | DELETE | `/api/gems/:id` | all guests/users         | Deletes the gem with the specified id                      |
 
+#### Completed Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/completed` | all guests/users      | Marks a gem as completed, expects a completed object |
+| GET    | `/api/completed` | all guests/users         | Returns a list of all the completed gems             |
+| GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
+| DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
+
 # Data Model
 
 🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+#### 2️⃣ Users
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  id: auto incementing
+  username: STRING
+  email: STRING
+  password: STRING
 }
 ```
 
-#### USERS
+#### Gems
 
 ---
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  id: auto incrementing
+  created_by_user: INTEGER
+  longitude: FLOAT
+  latitude: FLOAT
+  difficulty: INTEGER
+  description: TEXT
+}
+```
+
+#### Completed
+
+---
+
+```
+{
+  id: auto incrementing
+  gem_id: INTEGER
+  completed_at: timestamped
+  completed_by: INTEGER
+  difficulty: INTEGER
+  comments: TEXT
+}
+```
+
+#### Photo Clues
+
+---
+
+```
+{
+  id: auto incrementing
+  name: STRING
+  description: STRING
+  gem_id: INTEGER
+  photo_url: STRING
 }
 ```
 
