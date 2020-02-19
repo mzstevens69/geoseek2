@@ -22,7 +22,7 @@ router.post('/', (req, res)=>{
 })
 
 router.get('/', (req, res)=>{
-    gems.findGem()
+    gems.findGems()
         .then(gem=>{
             res.status(201).json(gem)
         })

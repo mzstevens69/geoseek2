@@ -32,14 +32,6 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
@@ -50,6 +42,16 @@ To get the server running locally:
 | POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
 | PUT    | `/users/:userId`        | owners, supervisors |                                                    |
 | DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+
+#### Gem Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/gems` | all guests/users      | Creates a new gem |
+| GET    | `/api/gems` | all guests/users         | Returns a list of all the gems             |
+| GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id                      |
+| PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
+| DELETE | `/api/gems/:id` | all guests/users         | Deletes the gem with the specified id                      |
 
 # Data Model
 
