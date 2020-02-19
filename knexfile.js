@@ -23,7 +23,7 @@ module.exports = {
   herokuTest: {
     client: 'pg',
     connection: 
-      process.env.DATABASE_URL + `?ssl=true`
+      process.env.DATABASE_URL
     ,
     pool: {
       min: 2,
