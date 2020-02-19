@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Completed = require('./completed-model')
-const Gems = require('../')
+
+//GETS all completed gems
 
 router.get("/", (req, res) => {
     Completed.getCompleted(req.query)
@@ -14,7 +15,9 @@ router.get("/", (req, res) => {
             });       
         });
 });
-// GET completed gem by gem Id
+
+// GET completed gem by  Id
+
 router.get("/:id", (req, res) => {
   const id = req.params.id;
     Completed.findById(id)
@@ -28,24 +31,17 @@ router.get("/:id", (req, res) => {
           }
         })
         .catch(error => {
-            console.log(500).json({
+            console.log(error)
+            res.status(500).json({
                 message: "The post information could not be retrieved."
             });
         });
 });
 
-// Get by gems
-
-router.get('/users/:id', (req, res) => {
-
-
-
-})
-
 //POST creates a completed gem 
+
 router.post("/", (req, res) => {
-    
-    
+       
     Completed.insert(req.body)
         .then(ins => {
             console.log(ins)
@@ -57,14 +53,11 @@ router.post("/", (req, res) => {
                 message: "There was an error while saving the completed gem to the database."
             });
         })
-   
-        // res.status(400).json({
-        //     errorMessage: "Please provide  for the completed gem."
-        // });
-    
+
 });
 
 //DELETE removes the completed gem with secific ID
+
 router.delete('/:id', (req, res) => {
     Completed.remove(req.params.id)
     .then(remove => {
@@ -82,11 +75,5 @@ router.delete('/:id', (req, res) => {
       });
     });
   });
-
-
-
-
-
-
 
 module.exports = router;

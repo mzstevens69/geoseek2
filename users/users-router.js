@@ -38,6 +38,43 @@ router.post('/login', (req, res) => {
           });
   });
 
+  router.get('/', (req, res) => {
+    Users.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to get all users' });
+    });
+  });
+
+  router.get('/:id', (req,res)=>{
+    Users.findById(req.params.id)
+    .then(user=>{
+        res.status(200).json(user)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({message: 'failed to get user'})
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+  
+    Users.remove(id)
+    .then(deleted => {
+      if (deleted) {
+        res.json({ removed: deleted });
+      } else {
+        res.status(404).json({ message: 'Could not find user with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to delete the user' });
+    });
+  });
+
   function generateToken(user){
     const payload = {
         username: user.username,
@@ -49,5 +86,5 @@ router.post('/login', (req, res) => {
     return jwt.sign(payload, process.env.JWT_SECRET || 'letsQuest', options)
   }
 
-
+  
 module.exports = router 

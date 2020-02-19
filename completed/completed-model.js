@@ -5,25 +5,37 @@ module.exports = {
     insert,
     findById,
     getCompleted,
-    find
+    remove
+  
 }
 
-// add a completed gem to the project table showing project that it created
+// add a completed gem to the completed table showing completed that it created
+
 function insert(completed) {
     return db('completed')
         .insert(completed)
         .then(ids => ({ id: ids[0] }))
 }
+
 // all completed in the completed table
+
 function getCompleted() {
     return db('completed')
 }
+
+// finds a completed by completed Id
+
 function findById(id) {
     return db('completed')
       .where({ id })
       .first()
   }
-function find(filter) {
-    return db('gems')
-        .where
-}
+
+// Deletes a completed gem by Id
+
+  function remove(id) {
+    return db('completed')
+      .where('id', id)
+      .del();
+  }
+
