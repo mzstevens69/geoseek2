@@ -2,12 +2,19 @@ const db = require('../dbConfig')
 
 module.exports = {
    findPhotoByGem,
-   create,
-   findAll,
-   edit 
+   createPhoto,
+   findAll, // Remove 
+   editPhoto,
+   destory  
 }
 
-function edit(id, edit) {
+function destory(id){
+    return db('photo_clues')
+        .where('id', id)
+        .delete()
+}
+
+function editPhoto(id, edit) {
     return db('photo_clues')
     .where('id', id)
     .update(edit)
@@ -16,16 +23,6 @@ function edit(id, edit) {
         .where('id', id)
     })
 }
-
-// function updateGem(id, updated){
-//     return db('gems')
-//         .where('id', id)
-//         .update(updated)
-//         .then(() => {
-//             return db('gems')
-//             .where('id', id)
-//           })
-// }
 
 function findAll() {
     return db('photo_clues')
@@ -38,7 +35,7 @@ function findPhotoByGem(gem_id) {
     .where('gem_id', gem_id)
 }
 
-function create(photo) {
+function createPhoto(photo) {
     return db('photo_clues')
     .insert(photo)
 }

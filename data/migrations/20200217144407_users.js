@@ -34,7 +34,7 @@ exports.up = function(knex) {
         // tbl.integer('gem_id')
         // .unsigned()
         // .notNullable()
-        // .references('id')
+        // .references('id')            UNCOMMENT WHEN SEED IS UP AND RUNNING 
         // .inTable('gems')
         tbl.string('photo_url')
         .notNullable()
