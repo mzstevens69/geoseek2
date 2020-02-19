@@ -36,12 +36,11 @@ To get the server running locally:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| POST    | `/api/users/register`        | all guests/users           | Creates a new user, id auto increments               |
+| POST    | `/api/users/login`    | users with a created account | Expects a user object to compare with database             |
+| GET    | `/api/users`        | all guests/users | Returns a list of all users' id and usernames.                    |
+| GET   | `/api/users/:id` | all guests/users                | Returns the user with the specified id |
+| DELETE | `/api/users/:userId`        | all guests/users | Deletes the user with the specified id                                          |
 
 #### Gem Routes
 
