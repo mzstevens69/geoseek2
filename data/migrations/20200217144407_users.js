@@ -64,3 +64,4 @@ exports.down = function(knex) {
     .dropTableIfExists('gems')
     .dropTableIfExists('users')
 };
+// changes
