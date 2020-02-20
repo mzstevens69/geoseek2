@@ -10,7 +10,7 @@ module.exports={
 
 function addGem(gem){
     return db('gems')
-        .insert(gems)
+        .insert(gem)
 }
 
 function findGems(){
