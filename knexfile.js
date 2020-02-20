@@ -3,10 +3,10 @@
 module.exports = {
 
   development: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      host: 'localhost',
       database: 'postgres',
+      host: 'localhost',
       user:     'postgres',
       password: 'geoseek-admin'
     },
@@ -17,51 +17,60 @@ module.exports = {
     migrations: {
       directory: './data/migrations',
       tableName: 'knex_migrations'
-    },
-    seeds:{
-      //location of seed data for the DB
-      directory: './data/seeds'
-    },
-    
-  },
-  testing:{
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      // location and name of DB
-      filename: './data/geoseek.db3'
-    },
-    migrations: {
-      // location of migrations for the DB
-      directory: './data/migrations'
-    },
-    seeds:{
-      //location of seed data for the DB
-      directory: './data/seeds'
-    },
-    pool:{
-      afterCreate: (conn, done)=>{
-        conn.run('PRAGMA foreign_keys = ON',done)
-      }
-
     }
   },
 
-  staging: {
-    client: 'postgresql',
+  herokuTest: {
+    client: 'pg',
+    connection: 
+      process.env.DATABASE_URL
+    ,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    }
+  },
+
+  testing:{
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: 'postgres',
+      host: 'localhost',
+      user:     'postgres',
+      password: 'geoseek-admin'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
+      directory: './data/migrations',
       tableName: 'knex_migrations'
     }
   },
+
+
+   staging: {
+    client: 'pg',
+    connection: {
+      database: 'd33m38q4mjfc6o',
+      host: 'ec2-54-80-184-43.compute-1.amazonaws.com',
+      user:     'dxwubnggbaufkf',
+      password: '7770b6ce3c6de9f83d6e96e8743fc4dd8029c24f73554f92e36fae0ebe04e7d0'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    }
+ },
 
   production: {
     client: 'postgresql',

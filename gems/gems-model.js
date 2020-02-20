@@ -2,7 +2,7 @@ const db= require('../dbConfig')
 
 module.exports={
     addGem,
-    findGem,
+    findGems,
     findGemsByUserId,
     updateGem,
     deleteGem
@@ -13,7 +13,7 @@ function addGem(gem){
         .insert(gems)
 }
 
-function findGem(){
+function findGems(){
     return db('gems').select("*");
 }
 

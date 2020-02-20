@@ -8,7 +8,7 @@
 
 #### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
@@ -28,65 +28,93 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
-
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
-
-#### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+## Endpoints
 
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| POST    | `/api/users/register`        | all guests/users           | Creates a new user, id auto increments               |
+| POST    | `/api/users/login`    | users with a created account | Expects a user object to compare with database             |
+| GET    | `/api/users`        | all guests/users | Returns a list of all users' id and usernames.                    |
+| GET   | `/api/users/:id` | all guests/users                | Returns the user with the specified id |
+| DELETE | `/api/users/:userId`        | all guests/users | Deletes the user with the specified id                                          |
+
+#### Gem Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/gems` | all guests/users      | Creates a new gem |
+| GET    | `/api/gems` | all guests/users         | Returns a list of all the gems             |
+| GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id                      |
+| PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
+| DELETE | `/api/gems/:id` | all guests/users         | Deletes the gem with the specified id                      |
+
+#### Completed Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/completed` | all guests/users      | Marks a gem as completed, expects a completed object |
+| GET    | `/api/completed` | all guests/users         | Returns a list of all the completed gems             |
+| GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
+| DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
+#### Users
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  id: auto incementing
+  username: STRING
+  email: STRING
+  password: STRING
 }
 ```
 
-#### USERS
+#### Gems
 
 ---
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  id: auto incrementing
+  created_by_user: INTEGER
+  longitude: FLOAT
+  latitude: FLOAT
+  difficulty: INTEGER
+  description: TEXT
+}
+```
+
+#### Completed
+
+---
+
+```
+{
+  id: auto incrementing
+  gem_id: INTEGER
+  completed_at: timestamped
+  completed_by: INTEGER
+  difficulty: INTEGER
+  comments: TEXT
+}
+```
+
+#### Photo Clues
+
+---
+
+```
+{
+  id: auto incrementing
+  name: STRING
+  description: STRING
+  gem_id: INTEGER
+  photo_url: STRING
 }
 ```
 
