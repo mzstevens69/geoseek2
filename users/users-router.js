@@ -13,12 +13,13 @@ router.post('/register', (req,res)=>{
 
     Users.add(user)
     .then(saved =>{
-        console.log(saved)
-        const newUser = {...saved, password: 'No password for you!'}
-        res.status(201).json(newUser)
+        // console.log(saved)
+        // const newUser = {...saved, password: 'No password for you!'}
+        res.status(201).json(saved.command)
     })
     .catch(error => {
-        res.status(500).json(error);
+
+        res.status(418).json(error);
     })
 });
 
@@ -38,6 +39,7 @@ router.post('/login', (req, res) => {
               }
           })
           .catch(error => {
+              console.log(error)
               res.status(500).json(error);
           });
   });
