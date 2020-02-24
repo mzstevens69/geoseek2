@@ -20,8 +20,28 @@ module.exports = {
   },
 
   herokuTest: {
-    client: "pg",
-    connection: process.env.DATABASE_URL,
+    client: 'pg',
+    connection: 
+      process.env.DATABASE_URL
+    ,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    }
+  },
+
+  testing:{
+    client: 'pg',
+    connection: {
+      database: 'postgres',
+      host: 'localhost',
+      user:     'postgres',
+      password: 'geoseek-admin'
+    },
     pool: {
       min: 2,
       max: 10,
