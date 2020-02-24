@@ -1,9 +1,9 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
-
   development: {
-    client: 'pg',
+    client: "pg",
     connection: {
       host: process.env.HOST,
       database: process.env.DATABASE,
@@ -12,77 +12,67 @@ module.exports = {
        
     },
     pool: {
-      min: 2,
-      max: 10
+      min: 3,
+      max: 100,
     },
     migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
+      directory: "./data/migrations",
+      tableName: "knex_migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
-  herokuTest: {
-    client: 'pg',
-    connection: 
-      process.env.DATABASE_URL
-    ,
+  testing: {
+    client: "pg",
+    connection: { 
+      host: process.env.HOST,
+      database: process.env.DATABASE,
+      user: process.env.USER,
+       password: process.env.PASSWORD
+    },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }, 
     },
     migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
+      directory: "./data/migrations",
+      tableName: "knex_migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
-  testing:{
-    client: 'pg',
+  staging: {
+    client: "pg",
     connection: {
-      database: 'postgres',
-      host: 'localhost',
-      user:     'postgres',
-      password: 'geoseek-admin'
+      connection: process.env.DATABASE_URL,
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
+      directory: "./data/migrations",
+      tableName: "knex_migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
-
-   staging: {
-    client: 'pg',
-    connection: {
-      database: 'd33m38q4mjfc6o',
-      host: 'ec2-54-80-184-43.compute-1.amazonaws.com',
-      user:     'dxwubnggbaufkf',
-      password: '7770b6ce3c6de9f83d6e96e8743fc4dd8029c24f73554f92e36fae0ebe04e7d0'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
     migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations'
-    }
- },
-
- production: {
-  client: 'pg',
-  connection: process.env.DATABASE_URL,
-  migrations: {
-    tableName: 'dbmigrations',
-    directory: './data/migrations'
+      tableName: "dbmigrations",
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
-  seeds: { 
-    directory: './data/seeds' 
-  }
-}
-
 };
