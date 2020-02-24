@@ -9,18 +9,19 @@ module.exports = {
 };
 
 // async function add(user) {
-//     const [id] = await db('users').insert(user);
-
+//     const id = await db('users').insert(user);
+  
 //     return findById(id);
 //   }
-function add(user) {
-  console.log(user.id);
-  return db("users").insert(user, "id");
+
+function add(user){
+return db('users').insert(user)
 }
 
-function find() {
-  return db("users").select("id", "username");
-}
+  function find(){
+    return db('users').select('id','username','email')
+    };
+
 
 function findBy(filter) {
   return db("users").where(filter);
