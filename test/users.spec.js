@@ -23,7 +23,7 @@ describe('Auth', ()=>{
 
 })
 describe('login user',()=>{
-    it('Post /api/auth/login', async ()=>{
+    it('Post /api/users/login', async ()=>{
         const register = await request(server)
         .post('/api/users/register')
         .send({username: 'pickleRick', email:'sechuansauce@rsanchez.com' , password:'jaguar'})
@@ -32,5 +32,19 @@ describe('login user',()=>{
         .send({username:"pickleRick", password:"jaguar"})
         expect(res.status).toBe(200)
         expect(res.body.token)
+    })
+})
+describe('remove user',()=>{
+    it('del /api/users/:id', async ()=>{
+        const register = await request(server)
+        .post('/api/users/register')
+        .send({username: 'pickleRick', email:'sechuansauce@rsanchez.com' , password:'jaguar'})
+        const login = await request(server)
+        .post('/api/users/login')
+        .send({username:"pickleRick", password:"jaguar"})
+        const res = await request(server)
+        .delete('/api/users/1')
+        expect(res.status).toBe(200)
+
     })
 })
