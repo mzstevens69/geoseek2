@@ -11,6 +11,7 @@ module.exports = {
 
 function insert(completed) {
   return db("completed")
+    .returning('id')
     .insert(completed)
     .then((ids) => {
       return findById(ids[0]);
