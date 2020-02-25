@@ -10,13 +10,15 @@ module.exports = {
 };
 
 function addGem ( gem ) {
-
-  return db( "gems" ).insert( gem );
+  return db("gems")
+    .returning('id')
+    .insert( gem );
 }
 
 function findGems () {
   return db( "gems" ).select( "*" );
 }
+
 function findById(id) {
     return db("completed")
       .where({ id })
