@@ -24,7 +24,6 @@ describe('the completed model', () => {
             await Completed.insert({ 	
         
                 gem_id: 1,
-                completed_by: 1,
                 comments: "test1"
         })            
             //open the db and see the completed is there
@@ -39,12 +38,10 @@ describe('the completed model', () => {
                 await db('completed').insert([
                     {
                         gem_id: 1,
-                        completed_by: 1,
                         comments: "test1"
                     },
                     {
                         gem_id: 2,
-                        completed_by: 2,
                         comments: "test2"
                     }
                 ])

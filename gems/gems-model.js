@@ -2,6 +2,7 @@ const db= require('../dbConfig')
 
 module.exports={
     addGem,
+    findById,
     findGems,
     findGemsByUserId,
     updateGem,
@@ -10,8 +11,17 @@ module.exports={
 
 function addGem(gem){
     return db('gems')
+        .returning('id')
         .insert(gem)
+        .then((ids) => {
+            return findById(ids[0]);
+          });
 }
+function findById(id) {
+    return db("completed")
+      .where({ id })
+      .first();
+  }
 
 function findGems(){
     return db('gems').select("*");

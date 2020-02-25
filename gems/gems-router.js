@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
     .addGem(newGem)
     .then((gem) => {
       console.log(gem);
-      res.status(201).json({gem},{ message: "gem created" });
+      res.status(201).json({gem, message: "gem created" });
     })
     .catch((err) => {
       console.log(err);

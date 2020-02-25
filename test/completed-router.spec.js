@@ -28,7 +28,6 @@ describe( 'POST that inserts completed', () => {
             .post('/api/completed')
             .send({
                 "gem_id": 1,
-	            "completed_by": 2,
 	            "comments": "test2"
             })
             .then(res => {
@@ -54,12 +53,10 @@ describe( 'POST that inserts completed', () => {
             .post('/api/completed')
             .send({
                 gem_id: 1,
-                completed_by: 1,
                 comments: "test1"
             },
             {
                 gem_id: 2,
-                completed_by: 2,
                 comments: "test2"
             })
             .get('/api/completed/2')
