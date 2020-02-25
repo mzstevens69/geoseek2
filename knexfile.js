@@ -7,7 +7,7 @@ module.exports = {
       database: "postgres",
       host: "localhost",
       user: "postgres",
-      password: "97Raymond97@",
+      password: "password",
     },
     pool: {
       min: 2,
@@ -40,7 +40,7 @@ module.exports = {
       database: 'postgres',
       host: 'localhost',
       user:     'postgres',
-      password: 'geoseek-admin'
+      password: 'password'
     },
     pool: {
       min: 2,
@@ -58,7 +58,7 @@ module.exports = {
       database: "postgres",
       host: "localhost",
       user: "postgres",
-      password: "geoseek-admin",
+      password: "password",
     },
     pool: {
       min: 2,
