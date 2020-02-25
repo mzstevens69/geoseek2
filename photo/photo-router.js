@@ -39,7 +39,7 @@ router.post('/add/:gemId', upload.single('photo'), async (req, res, next) => {
         const { name, description } = req.body
         const entry = await photoModel.createPhoto({
             name,
-            gem_id: req.params.gemId, //NEEDS SEED DATA FOR THIS TO WORK
+            gem_id: req.params.gemId, 
             description,
             photo_url: path
         })

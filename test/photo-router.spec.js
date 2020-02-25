@@ -59,7 +59,7 @@ describe('cant post a photo without a gem',()=>{
 })
 
 describe('delete a photo',()=>{
-  it('/api/photo/delete/:id', async ()=>{
+  it('Delete /api/photo/delete/:id', async ()=>{
       const register = await request(server)
       .post('/api/users/register')
       .send({username: 'dude', email:'dude@dude.com' , password:'dude'})
