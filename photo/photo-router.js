@@ -32,10 +32,10 @@ router.get('/:gemId', async (req, res, next) => {
 
 
 
-router.post('/add/gemId', upload.single('photo'), async (req, res, next) => {
+router.post('/add/:gemId', upload.single('photo'), async (req, res, next) => {
     try {
-        console.log(req.params)
-        const path = req.file.path
+        console.log(req.path)
+        const path = req.path
         const { name, description } = req.body
         const entry = await photoModel.createPhoto({
             name,
@@ -43,9 +43,9 @@ router.post('/add/gemId', upload.single('photo'), async (req, res, next) => {
             description,
             photo_url: path
         })
-        res.json(entry)
+        res.status(201).json(entry)
     } catch (ex) {
-        console.log(ex)
+        console.log(`${ex}this is photo upload err`)
         res.status(400).send({error: ex })
     }
 });
@@ -82,12 +82,9 @@ router.put('/edit', upload.single('photo'), async(req, res, next) => {
     }
 })
 router.delete('/delete/:id', async (req, res, next) => { 
-    const { id } = req.params
-    await photoModel.destory({
-        where: {
-            id
-        }
-    });
+    const { id } = req.params.id
+     photoModel.destroy(id)
+     .then
     res.json({ deleted: id })
  })
 
