@@ -3,6 +3,7 @@ const gems = require("./gems-model");
 
 router.post("/", (req, res) => {
   const newGem = req.body;
+  console.log("This is the newGem ====>", newGem);
   if (!newGem.longitude) {
     res.status(422).json({ error: "please provide longitude" });
   }
@@ -16,11 +17,11 @@ router.post("/", (req, res) => {
     .addGem(newGem)
     .then((gem) => {
       console.log(gem);
-      res.status(201).json({gem},{ message: "gem created" });
+      res.status(201).json({ gem, message: "Gem was created" });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({ error: "error creating gem" });
+      res.status(400).json({ error: "error creating gem" });
     });
 });
 
