@@ -146,7 +146,7 @@ To get the server running locally:
 
 ## 3️⃣ Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables.
+In order for the app to function correctly, the user ✏️ must set up their own environment variables.
 
 create a .env file that includes the following:
 

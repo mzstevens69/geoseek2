@@ -14,6 +14,7 @@ describe("server.js", function() {
         .then((res) => {
           expect(res.status).toBe(200);
         });
-    });
-  });
-});
+    });    
+
+    })        
+})

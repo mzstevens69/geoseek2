@@ -11,12 +11,12 @@ router.get("/", (req, res) => {
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                message: "Error retrieving the completed gems."
+                message: "🤪Error retrieving the completed gems❗️."
             });       
         });
 });
 
-// GET completed gem by  Id
+// GET a completed gem by  Id
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -26,14 +26,14 @@ router.get("/:id", (req, res) => {
             res.status(200).json(complete);
           } else {
               res.status(404).json({
-                  message: "The completed gem with the specified ID does not exist."
+                  message: "The completed 🥺 gem with the specified ID does not exist❗️."
               });
           }
         })
         .catch(error => {
             console.log(error)
             res.status(500).json({
-                message: "The post information could not be retrieved."
+                message: "The post information could not be retrieved❗️."
             });
         });
 });
@@ -44,7 +44,7 @@ router.post("/", (req, res) => {
        
     Completed.insert(req.body)
         .then(ins => {
-            console.log(ins)
+            
             res.status(201).json(ins);
         })
         .catch(error => {
@@ -71,7 +71,7 @@ router.delete('/:id', (req, res) => {
       // log error in database
       console.log(error);
       res.status(500).json({
-        error: "The completed gem could not be removed"
+        error: "The completed gem could not be removed⚠️"
       });
     });
   });
