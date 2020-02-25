@@ -27,11 +27,6 @@ function findGemsByUserId ( userId ) {
   return db( "gems" ).where( "user_id", userId );
 }
 
-function findById ( id ) {
-  return db( "gems" )
-    .where( { id } )
-    .first();
-}
 
 function findGemsByDistance ( long, lat ) {
   let realLong;

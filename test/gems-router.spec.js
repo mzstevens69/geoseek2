@@ -83,8 +83,17 @@ describe( "Put Endpoints", () => {
 
 describe( "Delete Endpoints", () => {
   it( "should delete gem with given id", async () => {
+    const create= await request(server)
+        .post('/api/gems')
+        .send({
+            title: "testing",
+            longitude: 1.02,
+            latitude: 1.02,
+            difficulty: 2,
+            description: "decent place",
+        })
     const res = await request( server )
-      .delete( "/api/gems/3" )
+      .delete( "/api/gems/1" )
       .then( ( res ) => {
         expect( res.statusCode ).toEqual( 200 );
         // expect(res.body).toHaveProperty("delete");
