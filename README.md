@@ -59,6 +59,16 @@ To get the server running locally:
 | GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
 | DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
 
+#### Photo Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/photo/add/:gemId` | all guests/users      | Adds a photo based on the gemId |
+| GET    | `/api/photo` | all guests/users         | Returns all the photo that as uploaded             |
+| GET    | `/api/photo/:gemId` | all guests/users         | Returns the photo url based on the gemId           |
+| PUT | `/api/photo/edit` | all guests/users         |  Updates name, description, and photo_url               |
+| DELETE | `/api/photo/delete/:id` | all guests/users         | Deletes the photo with the specified id                      |
+
 # Data Model
 
 #### Users
