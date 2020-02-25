@@ -13,7 +13,8 @@ describe('Post Endpoints', () => {
     const res= await request(server)
       .post('/api/gems')
       .send({
-        created_by_user: 1,
+        title: 'place',
+        // created_by_user: 1,
         longitude: 1.01,
         latitude: 1.01,
         difficulty: 3,
