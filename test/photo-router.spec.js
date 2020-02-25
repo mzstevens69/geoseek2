@@ -21,7 +21,7 @@ describe( 'post a photo', () => {
         const addGem = await request( server )
             .post( '/api/gems' )
             .send( {
-                created_by_user: 1,
+                title: "test",
                 longitude: "86.11133",
                 latitude: "36.01042",
                 difficulty: 1,
@@ -71,7 +71,7 @@ describe( 'delete a photo', () => {
         const addGem = await request( server )
             .post( '/api/gems' )
             .send( {
-                created_by_user: 1,
+                title: "test",
                 longitude: "86.11133",
                 latitude: "36.01042",
                 difficulty: 1,
