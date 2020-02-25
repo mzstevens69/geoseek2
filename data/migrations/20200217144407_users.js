@@ -13,9 +13,11 @@ exports.up = function(knex) {
     })
     .createTable('gems', tbl =>{
         tbl.increments();
+        tbl.string('title')
+        .notNullable()
         tbl.integer('created_by_user')
         .unsigned()
-        .notNullable()
+        // .notNullable()
         .references('id')
         .inTable('users')
         .onDelete('CASCADE')
