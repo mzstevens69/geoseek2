@@ -5,12 +5,12 @@ module.exports = {
    createPhoto,
    findAll, // Remove 
    editPhoto,
-   destory  
+   destroy  
 }
 
-function destory(id){
+function destroy(id){
     return db('photo_clues')
-        .where('id', id)
+        .where({ id })
         .delete()
 }
 
