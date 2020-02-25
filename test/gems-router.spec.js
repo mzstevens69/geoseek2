@@ -1,6 +1,7 @@
 const request= require('supertest')
 const gems= require('../gems/gems-router')
 const db= require('../dbConfig')
+const server= require('../server')
 
 beforeEach(()=>{
     return db.migrate.rollback('users')
@@ -8,8 +9,8 @@ beforeEach(()=>{
 })
 
 describe('Post Endpoints', () => {
-  it('should create a new gem', () => {
-    return request(gems)
+  it('should create a new gem', async () => {
+    const res= await request(server)
       .post('/api/gems')
       .send({
         created_by_user: 1,
@@ -26,17 +27,17 @@ describe('Post Endpoints', () => {
 })
 
 describe('Get Endpoints', () => {
-    it('should return gems', () => {
-      return request(gems)
+    it('should return gems', async() => {
+      const res= await request(server)
         .get('/api/gems')
         .then(res=>{
             expect(res.statusCode).toEqual(201)
             expect(res.body).toHaveProperty('get')
         })
     })
-    it('should return specific gem', () => {
-        return request(gems)
-        .get('/3')
+    it('should return specific gem', async () => {
+        const res= await request(server)
+        .get('/api/gems/3')
         .then(res=>{
             expect(res.statusCode).toEqual(201)
             expect(res.body).toHaveProperty('get')
@@ -46,8 +47,8 @@ describe('Get Endpoints', () => {
 })
 
 describe('Put Endpoints', () => {
-    it('should update gem', () => {
-        return request(gems)
+    it('should update gem', async () => {
+        const res= await request(server)
         .put('api/gems/3')
         .send({
             created_by_user: 2,
@@ -64,8 +65,8 @@ describe('Put Endpoints', () => {
 })
 
 describe('Delete Endpoints', () => {
-    it('should delete gem with given id', () => {
-        return request(gems)
+    it('should delete gem with given id', async () => {
+        const res= await request(server)
         .delete('/api/gems/3')
         .then(res=>{
             expect(res.statusCode).toEqual(200)
