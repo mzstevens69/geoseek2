@@ -15,10 +15,11 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.integer('created_by_user')
         .unsigned()
-        .notNullable()
         .references('id')
         .inTable('users')
         .onDelete('CASCADE')
+        tbl.string('title',100)
+        .notNullable()
         tbl.float('longitude')
         .notNullable()
         tbl.float('latitude')
