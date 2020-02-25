@@ -10,7 +10,7 @@ beforeEach(()=>{
 
 describe('Post Endpoints', () => {
   it('should create a new gem', async () => {
-    const res= await request(gems)
+    const res= await request(server)
       .post('/api/gems')
       .send({
         created_by_user: 1,
@@ -28,7 +28,7 @@ describe('Post Endpoints', () => {
 
 describe('Get Endpoints', () => {
     it('should return gems', async() => {
-      const res= await request(gems)
+      const res= await request(server)
         .get('/api/gems')
         .then(res=>{
             expect(res.statusCode).toEqual(201)
@@ -36,7 +36,7 @@ describe('Get Endpoints', () => {
         })
     })
     it('should return specific gem', async () => {
-        const res= await request(gems)
+        const res= await request(server)
         .get('/api/gems/3')
         .then(res=>{
             expect(res.statusCode).toEqual(201)
@@ -48,7 +48,7 @@ describe('Get Endpoints', () => {
 
 describe('Put Endpoints', () => {
     it('should update gem', async () => {
-        const res= await request(gems)
+        const res= await request(server)
         .put('api/gems/3')
         .send({
             created_by_user: 2,
@@ -66,7 +66,7 @@ describe('Put Endpoints', () => {
 
 describe('Delete Endpoints', () => {
     it('should delete gem with given id', async () => {
-        const res= await request(gems)
+        const res= await request(server)
         .delete('/api/gems/3')
         .then(res=>{
             expect(res.statusCode).toEqual(200)
