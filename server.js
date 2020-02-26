@@ -19,5 +19,9 @@ server.get('/',(req,res)=>{
     res.send('Server Running')
 })
 
+server.get('/db',(req,res)=>{
+    res.send(process.env.DATABASE_URL)
+})
+
 
 module.exports = server
