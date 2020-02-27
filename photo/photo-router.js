@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads')
     },
     filename: (req, file, cb) => {
-        console.log(file)
+    
         cb(null, `${file.fieldname}_${+new Date()}.jpeg`)
     }
 });
@@ -34,7 +34,7 @@ router.get('/:gemId', async (req, res, next) => {
 
 router.post('/add/:gemId', upload.single('photo'), async (req, res, next) => {
     try {
-        console.log(req.path)
+        
         const path = req.path
         const { name, description } = req.body
         const entry = await photoModel.createPhoto({
@@ -77,7 +77,7 @@ router.put('/edit', upload.single('photo'), async(req, res, next) => {
         });
         res.json(photo)
     }catch(ex){
-        console.log(ex)
+    
         res.status(400).send({ error:ex})
     }
 })

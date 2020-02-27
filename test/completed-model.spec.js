@@ -19,7 +19,7 @@ describe( 'the completed model', () => {
     } )
     describe( 'insert', () => {
 
-        it( 'adds the new completed gem to DB', async () => {
+        it( 'adds the new completed gem to DB', async() => {
             //call insert passing a hobbit
             await Completed.insert( {
 

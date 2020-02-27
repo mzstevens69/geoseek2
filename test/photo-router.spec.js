@@ -33,7 +33,7 @@ describe( 'post a photo', () => {
             .send( {
                 photo_url: "FB_IMG_1567806261583.jpg"
             } )
-        console.log( res )
+      
         expect( res.status ).toBe( 201 )
     } )
 } )
