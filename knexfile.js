@@ -26,16 +26,10 @@ module.exports = {
 
   testing: {
     client: "pg",
-    connection: { 
-      host: process.env.HOST,
-      database: process.env.DATABASE,
-      user: process.env.USER,
-       password: process.env.PASSWORD
-    },
+    connection: process.env.DATABASE_URL,
     pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done)
-      }, 
+      min: 2,
+      max: 10,
     },
     migrations: {
       directory: "./data/migrations",
