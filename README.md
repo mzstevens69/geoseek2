@@ -74,7 +74,7 @@ To get the server running locally:
 
 # Data Model
 
-#### Users
+## Users
 
 ---
 
@@ -87,7 +87,7 @@ To get the server running locally:
 }
 ```
 
-#### Gems
+## Gems
 
 ---
 
@@ -102,7 +102,7 @@ To get the server running locally:
 }
 ```
 
-#### Completed
+## Completed
 
 ---
 
@@ -117,7 +117,7 @@ To get the server running locally:
 }
 ```
 
-#### Photo Clues
+## Photo Clues
 
 ---
 
@@ -130,6 +130,34 @@ To get the server running locally:
   photo_url: STRING
 }
 ```
+
+# Information About Constraints 
+
+        SEEKERS
+        username: is required and unique       
+        email: is required
+        password: is required
+    
+        GEMS
+        title: is required 255 max characters    
+        createdByUser: is required and foreign key to users table
+        longitude: is required
+        latitude: is required
+        difficulty: is required
+        description: 150 max characters
+        
+    
+        PHOTO CLUES
+        name: is not required 255 max characters
+        description: is not required 255 max characters     
+        gemId: is required foreign key to gems
+        photoUrl: is required
+    
+        COMPLETED GEM
+        gemId: is required foreign key to gems
+        completedAt: adds timestamp
+        completedBy:  is required foreign key to users
+        comments: not required 150 max characters
 
 ## 2️⃣ Actions
 
