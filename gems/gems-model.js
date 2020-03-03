@@ -7,6 +7,7 @@ module.exports = {
   findGemsByUserId,
   updateGem,
   deleteGem,
+  findGemsByDistance
 };
 
 function addGem ( gem ) {
@@ -30,7 +31,7 @@ function findGemsByUserId ( userId ) {
 }
 
 
-function findGemsByDistance ( long, lat ) {
+function findGemsByDistance ( long, lat, threshhold ) {
   let realLong;
   let realLat;
   let radius = 0.08;
@@ -45,7 +46,18 @@ function findGemsByDistance ( long, lat ) {
   } else {
     realLat = lat + radius;
   }
-  return db( "gems" ).where( "longitude" <= realLong && "latitude" <= realLat );
+  if(nearbyGems===threshhold){
+    return db( "gems" ).where( "longitude" <= realLong && "longitude" >= long && "latitude" <= realLat && "latitude" >= lat);
+  }else{
+    while (nearbyGems < threshhold) {
+      radius = radius + 0.08
+      nearbyGems= +db("gems").count("id").where("longitude" <= realLong && "longitude" >= long && "latitude" <= realLat && "latitude" >= lat)
+    }
+  }
+ } 
+
+function findGemsByFilter(){
+
 }
 
 function updateGem ( id, updated ) {

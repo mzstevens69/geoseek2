@@ -34,6 +34,18 @@ router.get( "/", ( req, res ) => {
     } );
 } );
 
+router.get('/findNearby', (req, res)=>{
+  console.log(req.body)
+  gems
+    .findGemsByDistance(req.body.longitude, req.body.latitude, req.body.threshold)
+    .then(gem=>{
+      res.status(201).json(gem)
+    })
+    .catch( ( err ) => {
+      res.status( 500 ).json( { error: "error fetching gems by distance" } );
+    } );
+})
+
 router.get( "/:id", ( req, res ) => {
   const userId = req.body;
   gems
