@@ -31,30 +31,73 @@ function findGemsByUserId ( userId ) {
 }
 
 
-function findGemsByDistance ( long, lat, threshhold ) {
-  let realLong;
-  let realLat;
+function findGemsByDistance ( long, lat, threshold ) {
+  console.log ('Starting findGemsByDistance - Latitude: ',lat, 'Longitude: ', long, 'Threshold: ', threshold)
+  let extents = {
+    minLong: long,
+    maxLong: long,
+    minLat: lat,
+    maxLat: lat
+  }
+  console.log('Initial extents: ', extents)
   let radius = 0.08;
   let nearbyGems = 0;
-  if ( Math.sign( long ) === -1 ) {
-    realLong = ( long * -1 + radius ) * -1;
-  } else {
-    realLong = long + radius;
-  }
-  if ( Math.sign( lat ) === -1 ) {
-    realLat = ( long * -1 + radius ) * -1;
-  } else {
-    realLat = lat + radius;
-  }
-  if(nearbyGems===threshhold){
-    return db( "gems" ).where( "longitude" <= realLong && "longitude" >= long && "latitude" <= realLat && "latitude" >= lat);
-  }else{
-    while (nearbyGems < threshhold) {
-      radius = radius + 0.08
-      nearbyGems= +db("gems").count("id").where("longitude" <= realLong && "longitude" >= long && "latitude" <= realLat && "latitude" >= lat)
-    }
-  }
+  
+  do {
+    console.log('Entering Do While Loop...')
+    extents = expandExtents(extents, radius)
+    console.log('getCountResult:  ', getGemCount(extents))
+    nearbyGems = getGemCount(extents)
+    console.log('     Do While Loop has Count: ', nearbyGems)
+  } while (nearbyGems < threshold)
+  return db( "gems" )
+  .where("longitude", ">=", extents.minLong)
+  .andWhere("longitude", "<=", extents.maxLong)
+  .andWhere("latitude", ">=", extents.minLat)
+  .andWhere("latitude", "<=", extents.maxLat)
  } 
+
+ function expandExtents(extents, by) {
+   //console.log('Expanding: ', extents)
+    extents.minLong -= by
+    extents.maxLong += by
+    extents.minLat -= by
+    extents.maxLat += by
+    console.log('Extended to:', extents)
+    return extents
+ }
+
+ function getGemCount(extents) {
+   let count = 0
+   const builder = db
+   .count('t.* as count')
+   // You actually can use string|function with this = knex builder|another knex builder
+   .from(function () {
+       // Your actual query goes here
+       this
+          .select('*')
+          .from('gems')
+          .where("longitude", ">=", extents.minLong)
+          .andWhere("longitude", "<=", extents.maxLong)
+          .andWhere("latitude", ">=", extents.minLat)
+          .andWhere("latitude", "<=", extents.maxLat)
+          .as('t') // Alias for your DB (For example Postgres requires that inner query must have an alias)
+   })
+   .first()
+   const query = builder.toString()
+   builder.first().then(function(count) { let resultCount = count.count
+                                          console.log('Count returned: ',resultCount);
+                                          return resultCount; });
+   console.log('Count Query: ', query)
+
+  // count = db("gems").count("id")
+  // .where("longitude", ">=", extents.minLong)
+  // .andWhere("longitude", "<=", extents.maxLong)
+  // .andWhere("latitude", ">=", extents.minLat)
+  // .andWhere("latitude", "<=", extents.maxLat)
+  // console.log('getGemCount Result: ', count.first())
+  //return count
+ }
 
 function findGemsByFilter(){
 
