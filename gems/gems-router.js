@@ -36,7 +36,6 @@ router.get( "/", ( req, res ) => {
 
 router.post('/findNearby', (req, res)=>{
   console.log(req.body)
-  console.log("gems: ", gems)
   gems
     .findGemsByDistance(req.body.longitude, req.body.latitude, req.body.threshold)
     .then( ( gem )=>{
