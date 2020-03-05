@@ -18,7 +18,7 @@ router.post( "/", ( req, res ) => {
       res.status( 201 ).json( { gem, message: "Gem was created" } );
     } )
     .catch( ( err ) => {
-      console.log( err );
+     
       res.status( 400 ).json( { error: "error creating gem" } );
     } );
 } );
@@ -58,6 +58,19 @@ router.put( "/:id", ( req, res ) => {
       res.status( 500 ).json( { error: `error updating gem ${ id }` } );
     } );
 } );
+
+router.post('/findNearby', (req, res)=>{
+  console.log(req.body)
+  console.log("gems: ", gems)
+  gems
+    .findGemsByDistance(req.body.longitude, req.body.latitude, req.body.threshold)
+    .then( ( gem )=>{
+      res.status(201).json(gem)
+    })
+    .catch( ( err ) => {
+      res.status( 500 ).json( { error: "error fetching gems by distance" } );
+    } );
+})
 
 router.delete( "/:id", ( req, res ) => {
   const id = req.params.id;
