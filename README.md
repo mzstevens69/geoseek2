@@ -7,7 +7,7 @@
 
 # API Documentation
 
-## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be-stage.herokuapp.com/) <br>
+## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
 
 ## Getting started
 
@@ -31,7 +31,7 @@ To get the server running locally:
 
 ## Endpoints
 
-### Use before all Endpoints  🤡 (https://geoseek-be-stage.herokuapp.com/) 🤡
+### Use before all Endpoints  🤡 (https://geoseek-be.herokuapp.com/) 🤡
 
 #### User Routes
 
@@ -48,6 +48,7 @@ To get the server running locally:
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
 | POST    | `/api/gems` | all guests/users      | Creates a new gem |
+| POST    | `/api/gems/findNearby` | all guests/users      | Finds Gems near you accepting a Longitude, Latitude and Threshold |
 | GET    | `/api/gems` | all guests/users         | Returns a list of all the gems             |
 | GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id                      |
 | PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
@@ -86,6 +87,8 @@ To get the server running locally:
   password: STRING
 }
 ```
+
+
 
 ## Gems
 
@@ -133,7 +136,7 @@ To get the server running locally:
 
 # Information About Constraints 
 
-        SEEKERS
+        USERS
         username: is required and unique       
         email: is required
         password: is required
