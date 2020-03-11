@@ -61,6 +61,8 @@ To get the server running locally:
 | POST    | `/api/completed` | all guests/users      | Marks a gem as completed, expects a completed object |
 | GET    | `/api/completed` | all guests/users         | Returns a list of all the completed gems             |
 | GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
+ GET | `/api//completedByUser/:id` | all guests/users         | Returns a completed gems by user id                       |
+  GET | `/api/completed/completedByGemId/:id` | all guests/users         | Returns  completed gems by Gem id                      |
 | DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
 
 #### Photo Routes
