@@ -4,21 +4,28 @@ const bc = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // Registers a user
-router.post("/register", (req, res) => {
-  let user = req.body;
-  const hash = bc.hashSync(user.password, 4);
-  user.password = hash;
+router.post("/register", async(req, res) => {
+  let { username, email, password } = req.body;
 
-  Users.add(user)
-    .then(saved => {
+  try {
 
-      res.status(201).json(saved.command);
-    })
+  const hash = bc.hashSync(password, 10);
+  password = hash;
 
-    .catch(error => {
-      console.log(error);
+  const saved = await Users.add({
+    username,
+    email,
+    password
+  })
+  
+      res.status(201).json(saved);
+
+  }  catch(error) {
+      
       res.status(500).json(error);
-    });
+
+  }
+    
 });
 
 // logs in a user

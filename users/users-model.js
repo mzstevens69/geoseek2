@@ -9,7 +9,9 @@ module.exports = {
 };
 
 function add(user) {
-  return db("users").insert(user);
+  return db("users")
+  .returning(['id', 'username', 'email' ])
+  .insert(user);
 }
 
 function find() {
