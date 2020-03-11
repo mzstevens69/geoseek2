@@ -5,26 +5,16 @@ module.exports = {
   find,
   findBy,
   findById,
-  remove,
+  remove
 };
 
-// async function add(user) {
-//     const id = await db('users').insert(user);
-  
-//     return findById(id);
-//   }
-
-function add(user){
-
-return db('users')
-
-  .insert(user)
+function add(user) {
+  return db("users").insert(user);
 }
 
-  function find(){
-    return db('users').select('id','username','email')
-    };
-
+function find() {
+  return db("users").select("id", "username", "email");
+}
 
 function findBy(filter) {
   return db("users").where(filter);

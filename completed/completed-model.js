@@ -4,16 +4,16 @@ module.exports = {
   insert,
   findById,
   getCompleted,
-  remove,
+  remove
 };
 
 // add a completed gem to the completed table showing completed that it created
 
 function insert(completed) {
   return db("completed")
-    .returning('id')
+    .returning("id")
     .insert(completed)
-    .then((ids) => {
+    .then(ids => {
       return findById(ids[0]);
     });
 }

@@ -1,5 +1,4 @@
-
-require('dotenv').config();
+require("dotenv").config();
 
 module.exports = {
   development: {
@@ -8,20 +7,19 @@ module.exports = {
       host: process.env.HOST,
       database: process.env.DATABASE,
       user: process.env.USER,
-       password: process.env.PASSWORD
-       
+      password: process.env.PASSWORD
     },
     pool: {
       min: 3,
-      max: 100,
+      max: 100
     },
     migrations: {
       directory: "./data/migrations",
-      tableName: "knex_migrations",
+      tableName: "knex_migrations"
     },
     seeds: {
-      directory: "./data/seeds",
-    },
+      directory: "./data/seeds"
+    }
   },
 
   testing: {
@@ -29,15 +27,15 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
-      max: 10,
+      max: 10
     },
     migrations: {
       directory: "./data/migrations",
-      tableName: "knex_migrations",
+      tableName: "knex_migrations"
     },
     seeds: {
-      directory: "./data/seeds",
-    },
+      directory: "./data/seeds"
+    }
   },
 
   staging: {
@@ -45,15 +43,15 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
-      max: 10,
+      max: 10
     },
     migrations: {
       directory: "./data/migrations",
-      tableName: "knex_migrations",
+      tableName: "knex_migrations"
     },
     seeds: {
-      directory: "./data/seeds",
-    },
+      directory: "./data/seeds"
+    }
   },
 
   production: {
@@ -61,10 +59,10 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     migrations: {
       tableName: "dbmigrations",
-      directory: "./data/migrations",
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./data/seeds",
-    },
-  },
+      directory: "./data/seeds"
+    }
+  }
 };
