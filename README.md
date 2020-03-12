@@ -1,3 +1,4 @@
+
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
 🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
@@ -6,9 +7,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
@@ -28,73 +29,144 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
+## Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
-
-#### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+### Use before all Endpoints  🤡 (https://geoseek-be.herokuapp.com/) 🤡
 
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| POST    | `/api/users/register`        | all guests/users           | Creates a new user, id auto increments               |
+| POST    | `/api/users/login`    | users with a created account | Expects a user object to compare with database             |
+| GET    | `/api/users`        | all guests/users | Returns a list of all users' id and usernames.                    |
+| GET   | `/api/users/:id` | all guests/users                | Returns the user with the specified id |
+| DELETE | `/api/users/:userId`        | all guests/users | Deletes the user with the specified id                                          |
+
+#### Gem Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/gems` | all guests/users      | Creates a new gem |
+| POST    | `/api/gems/findNearby` | all guests/users      | Finds Gems near you accepting a Longitude, Latitude and Threshold |
+| GET    | `/api/gems` | all guests/users         | Returns a list of all the gems             |
+| GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id                      |
+| PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
+| DELETE | `/api/gems/:id` | all guests/users         | Deletes the gem with the specified id                      |
+
+#### Completed Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/completed` | all guests/users      | Marks a gem as completed, expects a completed object |
+| GET    | `/api/completed` | all guests/users         | Returns a list of all the completed gems             |
+| GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
+| DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
+
+#### Photo Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST    | `/api/photo/add/:gemId` | all guests/users      | Adds a photo based on the gemId |
+| GET    | `/api/photo` | all guests/users         | Returns all the photo that as uploaded             |
+| GET    | `/api/photo/:gemId` | all guests/users         | Returns the photo url based on the gemId           |
+| PUT | `/api/photo/edit` | all guests/users         |  Updates name, description, and photo_url               |
+| DELETE | `/api/photo/delete/:id` | all guests/users         | Deletes the photo with the specified id                      |
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
+## Users
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
-
-#### USERS
-
----
-
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
+  id: auto incementing
+  username: STRING
   email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  password: STRING
 }
 ```
+
+
+
+## Gems
+
+---
+
+```
+{
+  id: auto incrementing
+  created_by_user: INTEGER
+  longitude: FLOAT
+  latitude: FLOAT
+  difficulty: INTEGER
+  description: TEXT
+}
+```
+
+## Completed
+
+---
+
+```
+{
+  id: auto incrementing
+  gem_id: INTEGER
+  completed_at: timestamped
+  completed_by: INTEGER
+  difficulty: INTEGER
+  comments: TEXT
+}
+```
+
+## Photo Clues
+
+---
+
+```
+{
+  id: auto incrementing
+  name: STRING
+  description: STRING
+  gem_id: INTEGER
+  photo_url: STRING
+}
+```
+
+# Information About Constraints 
+
+        USERS
+        username: is required and unique       
+        email: is required
+        password: is required
+    
+        GEMS
+        title: is required 255 max characters    
+        createdByUser: is required and foreign key to users table
+        longitude: is required
+        latitude: is required
+        difficulty: is required
+        description: 150 max characters
+        
+    
+        PHOTO CLUES
+        name: is not required 255 max characters
+        description: is not required 255 max characters     
+        gemId: is required foreign key to gems
+        photoUrl: is required
+    
+        COMPLETED GEM
+        gemId: is required foreign key to gems
+        completedAt: adds timestamp
+        completedBy:  is required foreign key to users
+        comments: not required 150 max characters
 
 ## 2️⃣ Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+`getUsers()` -> Returns all Users
 
 `getOrg(orgId)` -> Returns a single organization by ID
 
@@ -106,7 +178,8 @@ To get the server running locally:
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
+
+`getUsers(Id)` -> if no param all users
 
 `getUser(userId)` -> Returns a single user by user ID
 
@@ -118,13 +191,18 @@ To get the server running locally:
 
 ## 3️⃣ Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables.
+In order for the app to function correctly, the user ✏️ must set up their own environment variables.
 
 create a .env file that includes the following:
 
 🚫 These are just examples, replace them with the specifics for your app
     
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
+    * Postgres local deployed .env variables database.
+      HOST
+      DATABASE
+      USER
+      PASSWORD 
+
     *  NODE_ENV - set to "development" until ready for "production"
     *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
     *  SENDGRID_API_KEY - this is generated in your Sendgrid account
@@ -170,3 +248,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
 🚫 Add DS iOS and/or Andriod links here if applicable.
+
+Making a change.
