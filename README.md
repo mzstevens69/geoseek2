@@ -5,6 +5,9 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/test_coverage)
+
 # API Documentation
 
 ## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
