@@ -4,6 +4,8 @@ module.exports = {
   insert,
   findById,
   getCompleted,
+  getCompletedByUser,
+  getCompletedByGemId,
   remove
 };
 
@@ -38,4 +40,18 @@ function remove(id) {
   return db("completed")
     .where("id", id)
     .del();
+}
+
+// Gets Completed Gems by specific User
+
+function getCompletedByUser(id) {
+  return db('completed')
+    .returning(['id','completed_by','gem_id','comments'])
+    .where('completed_by', id)
+}
+
+function getCompletedByGemId(id) {
+return db('completed')
+    .returning(['id','completed_by','gem_id','comments'])
+    .where('gem_id', id)
 }
