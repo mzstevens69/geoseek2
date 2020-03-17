@@ -49,7 +49,21 @@ router.post("/findNearby", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.post('/findGemsForViewport', (req, res)=>{
+  let viewport = req.body.viewport
+  let extents = req.body.extents
+  console.log('Running firndGemsByViewport with viewport: ', viewport, 'extents: ', extents)
+  gems
+    .findGemsForViewport(viewport, extents)
+    .then( ( gem )=>{
+      res.status(201).json(gem)
+    })
+    .catch( ( err ) => {
+      res.status( 500 ).json( { error: "error fetching gems by viewport" } );
+    } );
+})
+
+router.get( "/:id", ( req, res ) => {
   const userId = req.body;
   gems
     .findGemsByUserId(userId)
