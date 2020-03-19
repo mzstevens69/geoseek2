@@ -43,12 +43,14 @@ async function findGemsByDistance ( long, lat, threshold ) {
   }
   console.log('Initial viewport: ', viewport)
   let nearbyGems = 0;
+  let count = 0;
 
   console.log("Entering Do While Loop...");
   do {
+    count += count
     viewport = expandExtents(viewport, radius)
     nearbyGems = await getGemCount(viewport)
-  } while (nearbyGems < threshold)
+  } while ((nearbyGems < threshold) || (count > 20))
   console.log('Exited Do While Loop... with nearby count: ', nearbyGems)
   const result = await findGemsForViewport(viewport, 0)
   return result
@@ -78,6 +80,15 @@ async function findGemsByDistance ( long, lat, threshold ) {
     viewport.maxLat += by
     console.log('Extended to:', viewport)
     return viewport
+ }
+
+ async function getTotalGemCount() {
+  const result = await db("gems")
+  .count("id")
+  .first()
+  console.log('Count returned: ',result.count)
+  return result.count
+
  }
 
  async function getGemCount(viewport) {
