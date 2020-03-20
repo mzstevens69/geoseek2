@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
   gems
     .findGems()
     .then(gem => {
-      res.status(201).json(gem);
+      res.status(200).json(gem);
     })
     .catch(err => {
       res.status(500).json({ error: "error fetching gems" });

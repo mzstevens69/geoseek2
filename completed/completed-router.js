@@ -8,7 +8,7 @@ router.get("/completedByUser/:id", (req, res) => {
     .then(completeUser => {
       if (!completeUser) {
         res.status(404).json({
-          Errormessage: "User hasn't completed any gems"
+          Errormessage: "🔷 User hasn't completed any gems 🔹"
         });
       } else {
         res.status(200).json(completeUser);
@@ -17,7 +17,7 @@ router.get("/completedByUser/:id", (req, res) => {
     .catch(error => {
       console.log(error);
       res.status(500).json({
-        message: "🤪Error retrieving the completed gems by User❗."
+        message: "🤪Error retrieving the completed gems 🔹 by User❗."
       });
     });
 });
@@ -53,7 +53,7 @@ router.get("/", (req, res) => {
     .catch(error => {
       console.log(error);
       res.status(500).json({
-        message: "🤪Error retrieving the completed gems❗️."
+        message: "🤪 Error retrieving the completed gems 🔹."
       });
     });
 });
@@ -76,7 +76,7 @@ router.get("/:id", (req, res) => {
     .catch(error => {
       console.log(error);
       res.status(500).json({
-        message: "The post information could not be retrieved❗️."
+        message: "The gem 🔹 information could not be retrieved❗️."
       });
     });
 });
