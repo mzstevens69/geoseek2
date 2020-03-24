@@ -63,8 +63,8 @@ router.post('/findGemsForViewport', (req, res)=>{
     } );
 })
 
-router.get( "/:id", ( req, res ) => {
-  const userId = req.body;
+router.get( "/byUser/:id", ( req, res ) => {
+  const userId = req.params.id
   gems
     .findGemsByUserId(userId)
     .then(gems => {
