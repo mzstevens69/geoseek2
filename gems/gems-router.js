@@ -63,7 +63,7 @@ router.post('/findGemsForViewport', (req, res)=>{
     } );
 })
 
-router.get( "/byUser/:id", ( req, res ) => {
+router.get("/byUser/:id", ( req, res ) => {
   const userId = req.params.id
   gems
     .findGemsByUserId(userId)
@@ -71,7 +71,19 @@ router.get( "/byUser/:id", ( req, res ) => {
       res.status(201).json(gems);
     })
     .catch(err => {
-      res.status(500).json({ error: "error fetching gems" });
+      res.status(500).json({ error: `error fetching gems created by user ${userId}` });
+    });
+});
+
+router.get("/:id", ( req, res ) => {
+  const id = req.params.id
+  gems
+    .findById(id)
+    .then(gems => {
+      res.status(201).json(gems);
+    })
+    .catch(err => {
+      res.status(500).json({ error: `error fetching gem ${id}` });
     });
 });
 
