@@ -29,7 +29,7 @@ function findById(id) {
 }
 
 function findGemsByUserId(userId) {
-  return db("gems").where("created_by_user", userId);
+  return db("gems").where("created_by_user", userId); 
 }
 
 
