@@ -60,7 +60,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("completed")
     .dropTableIfExists("photo_clues")
-    .dropTableIfExists("gems")
-    .dropTableIfExists("users");
+    .dropTableIfExists("users")
+    .dropTableIfExists("gems");
 };
 // changes

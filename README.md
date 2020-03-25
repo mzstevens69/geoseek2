@@ -1,19 +1,13 @@
-
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+[![Maintainability](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/test_coverage)
 
 # API Documentation
 
-## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
+## Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
 
 ## Getting started
 
 To get the server running locally:
-
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **yarn install** to install all required dependencies
@@ -83,7 +77,7 @@ To get the server running locally:
 
 ```
 {
-  id: auto incementing
+  id: auto incrementing
   username: STRING
   email: STRING
   password: STRING
@@ -136,13 +130,13 @@ To get the server running locally:
 }
 ```
 
-# Information About Constraints 
+# Information About Constraints
 
         USERS
         username: is required and unique       
         email: is required
         password: is required
-    
+
         GEMS
         title: is required 255 max characters    
         createdByUser: is required and foreign key to users table
@@ -150,21 +144,21 @@ To get the server running locally:
         latitude: is required
         difficulty: is required
         description: 150 max characters
-        
-    
+
+
         PHOTO CLUES
         name: is not required 255 max characters
         description: is not required 255 max characters     
         gemId: is required foreign key to gems
         photoUrl: is required
-    
+
         COMPLETED GEM
         gemId: is required foreign key to gems
         completedAt: adds timestamp
         completedBy:  is required foreign key to users
         comments: not required 150 max characters
 
-## 2️⃣ Actions
+## Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
@@ -198,18 +192,18 @@ In order for the app to function correctly, the user ✏️ must set up their ow
 create a .env file that includes the following:
 
 🚫 These are just examples, replace them with the specifics for your app
-    
+
     * Postgres local deployed .env variables database.
       HOST
       DATABASE
       USER
-      PASSWORD 
+      PASSWORD
 
     *  NODE_ENV - set to "development" until ready for "production"
     *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
     *  SENDGRID_API_KEY - this is generated in your Sendgrid account
     *  stripe_secret - this is generated in the Stripe dashboard
-    
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.

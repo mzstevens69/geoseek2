@@ -49,15 +49,41 @@ router.post("/findNearby", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
-  const userId = req.body;
+router.post('/findGemsForViewport', (req, res)=>{
+  let viewport = req.body.viewport
+  let extents = req.body.extents
+  console.log('Running firndGemsByViewport with viewport: ', viewport, 'extents: ', extents)
+  gems
+    .findGemsForViewport(viewport, extents)
+    .then( ( gem )=>{
+      res.status(201).json(gem)
+    })
+    .catch( ( err ) => {
+      res.status( 500 ).json( { error: "error fetching gems by viewport" } );
+    } );
+})
+
+router.get("/byUser/:id", ( req, res ) => {
+  const userId = req.params.id
   gems
     .findGemsByUserId(userId)
     .then(gems => {
       res.status(201).json(gems);
     })
     .catch(err => {
-      res.status(500).json({ error: "error fetching gems" });
+      res.status(500).json({ error: `error fetching gems created by user ${userId}` });
+    });
+});
+
+router.get("/:id", ( req, res ) => {
+  const id = req.params.id
+  gems
+    .findById(id)
+    .then(gems => {
+      res.status(201).json(gems);
+    })
+    .catch(err => {
+      res.status(500).json({ error: `error fetching gem ${id}` });
     });
 });
 

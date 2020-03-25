@@ -1,4 +1,5 @@
-const db = require("../dbConfig");
+const db = require( "../dbConfig" );
+const radius = 0.08;
 
 module.exports = {
   addGem,
@@ -7,7 +8,8 @@ module.exports = {
   findGemsByUserId,
   updateGem,
   deleteGem,
-  findGemsByDistance
+  findGemsByDistance,
+  findGemsForViewport
 };
 
 function addGem(gem) {
@@ -27,61 +29,79 @@ function findById(id) {
 }
 
 function findGemsByUserId(userId) {
-  return db("gems").where("user_id", userId);
+  return db("gems").where("created_by_user", userId); 
 }
 
-async function findGemsByDistance(long, lat, threshold) {
-  console.log(
-    "Starting findGemsByDistance - Latitude: ",
-    lat,
-    "Longitude: ",
-    long,
-    "Threshold: ",
-    threshold
-  );
-  let extents = {
+
+async function findGemsByDistance ( long, lat, threshold ) {
+  console.log ('Starting findGemsByDistance - Latitude: ',lat, 'Longitude: ', long, 'Threshold: ', threshold)
+  let viewport = {
     minLong: long,
     maxLong: long,
     minLat: lat,
     maxLat: lat
-  };
-  console.log("Initial extents: ", extents);
-  let radius = 0.08;
+  }
+  console.log('Initial viewport: ', viewport)
   let nearbyGems = 0;
+  let count = 0;
 
   console.log("Entering Do While Loop...");
   do {
-    extents = expandExtents(extents, radius);
-    nearbyGems = await getGemCount(extents);
-  } while (nearbyGems < threshold);
-  console.log("Exited Do While Loop... with nearby count: ", nearbyGems);
-  return db("gems")
-    .where("longitude", ">=", extents.minLong)
-    .andWhere("longitude", "<=", extents.maxLong)
-    .andWhere("latitude", ">=", extents.minLat)
-    .andWhere("latitude", "<=", extents.maxLat);
-}
+    count += count
+    viewport = expandExtents(viewport, radius)
+    nearbyGems = await getGemCount(viewport)
+  } while ((nearbyGems < threshold) || (count > 20))
+  console.log('Exited Do While Loop... with nearby count: ', nearbyGems)
+  const result = await findGemsForViewport(viewport, 0)
+  return result
+ } 
 
-function expandExtents(extents, by) {
-  extents.minLong -= by;
-  extents.maxLong += by;
-  extents.minLat -= by;
-  extents.maxLat += by;
-  console.log("Extended to:", extents);
-  return extents;
-}
+ async function findGemsForViewport(viewport, extents) {
+  if (extents == null) {extents = 1}
+  var i;
+  if ( extents > 0 ) {
+    for (i=0;i >= extents; i++) {
+      console.log('Expanding in findGemsForViewport ', extents,' times ...count: ', i)
+      expandExtents(viewport, radius)
+    }
+  }
+  const result = await db( "gems" )
+  .where("longitude", ">=", viewport.minLong)
+  .andWhere("longitude", "<=", viewport.maxLong)
+  .andWhere("latitude", ">=", viewport.minLat)
+  .andWhere("latitude", "<=", viewport.maxLat)
+  return result
+ }
 
-async function getGemCount(extents) {
+ function expandExtents(viewport, by) {
+    viewport.minLong -= by
+    viewport.maxLong += by
+    viewport.minLat -= by
+    viewport.maxLat += by
+    console.log('Extended to:', viewport)
+    return viewport
+ }
+
+ async function getTotalGemCount() {
   const result = await db("gems")
+  .count("id")
+  .first()
+  console.log('Count returned: ',result.count)
+  return result.count
+
+ }
+
+ async function getGemCount(viewport) {
+    const result = await db("gems")
     .count("id")
-    .where("longitude", ">=", extents.minLong)
-    .andWhere("longitude", "<=", extents.maxLong)
-    .andWhere("latitude", ">=", extents.minLat)
-    .andWhere("latitude", "<=", extents.maxLat)
-    .first();
-  console.log("Count returned: ", result.count);
-  return result.count;
-}
+    .where("longitude", ">=", viewport.minLong)
+    .andWhere("longitude", "<=", viewport.maxLong)
+    .andWhere("latitude", ">=", viewport.minLat)
+    .andWhere("latitude", "<=", viewport.maxLat)
+    .first()
+    console.log('Count returned: ',result.count)
+    return result.count
+ }
 
 function findGemsByFilter() {}
 
