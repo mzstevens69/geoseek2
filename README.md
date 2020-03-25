@@ -153,47 +153,61 @@ To get the server running locally:
 
 ## Actions
 
-`find()` -> Returns User with Id, username, email
+`find()` --> Returns User with Id, username, email
 
-`findById(id)` -> Returns a single user by Id
+`findById(id)` --> Returns a single user by Id
 
-`add()` -> Returns the created user
+`add()` --> Returns the created user
 
-`findBy(filter)` -> Update an organization by Id
+`findBy(filter)` --> Update an organization by Id
 
-`remove(id)` -> Delete a user by Id
+`remove(id)` --> Delete a user by Id
 <br>
 <br>
 <br>
 
-`addGem()` -> if no param all users
+`addGem()` --> if no param all users
 
-`updateGem(Id)` Passed an object it updates object by it's Id
+`updateGem(Id)` --> Passed an object it updates object by it's Id
 
-`findGems()` -> Returns all Gems
+`findGems()` --> Returns all Gems
 
-`findById(Id)` -> Finds a gem by the Id
+`findById(Id)` --> Finds a gem by the Id
 
-`findGemsByUserId()` -> Returns gems that were created by the User Id.
+`findGemsByUserId()` --> Returns gems that were created by the User Id.
 
-`findGemsByDistance()` -> Returns gems that are closest to user by a threshold
+`findGemsByDistance()` --> Returns gems that are closest to user by a threshold
 
-`deleteGem(Id)` -> deletes gem
+`deleteGem(Id)` --> deletes gem
 <br>
 <br>
 <br>
 
-`insert()` -> add a completed gem
+`insert()` --> add a completed gem
 
-`findById(Id)` -> finds a completed by completed Id
+`findById(Id)` --> finds a completed by completed Id
 
-`getCompleted()` -> all completed in the completed table
+`getCompleted()` --> all completed in the completed table
 
-`getCompletedByUser(Id)` -> Gets Completed Gems by specific User
+`getCompletedByUser(Id)` --> Gets Completed Gems by specific User
 
-`getCompletedByGemId(Id)` -> Gets Completed Gems by Id
+`getCompletedByGemId(Id)` --> Gets Completed Gems by Id
 
-`remove(Id)` -> deletes completed gem
+`remove(Id)` --> deletes completed gem
+
+<br>
+<br>
+<br>
+
+`findPhotoByGem(Id)` --> Returns photo by gem Id
+
+`createPhoto()` --> adds a photo to a gem
+
+`findAll()` --> returns all photos in the table
+
+`editPhoto()` --> Passed an object it updates object by it's Id
+
+`destroy()` --> deletes a photo
 
 ## Environment Variables
 
