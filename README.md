@@ -216,13 +216,11 @@ In order for the app to function correctly, the user ✏️ must set up their ow
 create a .env file that includes the following:
 
 ```{
-   * Postgres local deployed .env variables database.
-
       HOST
       DATABASE
       USER
       PASSWORD
-   *  NODE_ENV - set to "development" until ready for "production"
+      NODE_ENV - set to "development" until ready for "production"
 
 ```
 
