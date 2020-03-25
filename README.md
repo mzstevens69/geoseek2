@@ -14,7 +14,7 @@ To get the server running locally:
 - **npm run server** to start the local server
 - **npm test** to start server using testing environment
 
-### Backend framework goes here
+### Backend framework 
 
 - Express is a quick framework of Nodejs and was used to aid in a quick start so that the app could get a quick start to allow it to be released to users for feedback as well as it's adaptability and accessibility to middleware.
 - PostgreSQl was used for scalibility  and built in features for data integrity and fault tolerant at any dataset size.
@@ -78,8 +78,7 @@ To get the server running locally:
     username: STRING
     email: STRING
     password: STRING
-  }
-
+  
 ```
 
 ## Gems
@@ -93,8 +92,7 @@ To get the server running locally:
     latitude: FLOAT
     difficulty: INTEGER
     description: TEXT
-  }
-
+  
 ```
 
 ## Completed
@@ -108,8 +106,7 @@ To get the server running locally:
     completed_by: INTEGER
     difficulty: INTEGER
     comments: TEXT
-  }
-
+  
 ```
 
 ## Photo Clues
@@ -122,37 +119,37 @@ To get the server running locally:
       description: STRING
       gem_id: INTEGER
       photo_url: STRING
-  }
-
+  
 ```
 
 # Information About Constraints
 
-        USERS
-        username: is required and unique       
-        email: is required
-        password: is required
+```{
+    USERS
+      username: is required and unique
+      email: is required
+      password: is required
 
-        GEMS
-        title: is required 255 max characters    
-        createdByUser: is required and foreign key to users table
-        longitude: is required
-        latitude: is required
-        difficulty: is required
-        description: 150 max characters
+    GEMS
+      title: is required 255 max characters
+      createdByUser: is required and foreign key to users table
+      longitude: is required
+      latitude: is required
+      difficulty: is required
+      description: 150 max characters
 
+    PHOTO CLUES
+      name: is not required 255 max characters
+      description: is not required 255 max characters
+      gemId: is required foreign key to gems
+      photoUrl: is required
 
-        PHOTO CLUES
-        name: is not required 255 max characters
-        description: is not required 255 max characters     
-        gemId: is required foreign key to gems
-        photoUrl: is required
-
-        COMPLETED GEM
-        gemId: is required foreign key to gems
-        completedAt: adds timestamp
-        completedBy:  is required foreign key to users
-        comments: not required 150 max characters
+    COMPLETED GEM
+      gemId: is required foreign key to gems
+      completedAt: adds timestamp
+      completedBy:  is required foreign key to users
+      comments: not required 150 max characters
+```
 
 ## Actions
 
@@ -204,7 +201,8 @@ In order for the app to function correctly, the user ✏️ must set up their ow
 
 create a .env file that includes the following:
 
-```* Postgres local deployed .env variables database.
+```{
+   * Postgres local deployed .env variables database.
 
       HOST
       DATABASE
@@ -254,4 +252,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [Frontend Documentation](https://github.com/Lambda-School-Labs/geoseek-fe/blob/master/README.md) for details on the fronend of our project.
- Add DS iOS and/or Andriod links here if applicable.
+See [IOS Documentation](https://github.com/Lambda-School-Labs/geoseek-iOS/blob/master/README.md) for details on the IOS project.
