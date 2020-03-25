@@ -14,9 +14,9 @@ To get the server running locally:
 - **npm run server** to start the local server
 - **npm test** to start server using testing environment
 
-### Backend framework 
+### Backend framework
 
-- Express is a quick framework of Nodejs and was used to aid in a quick start so that the app could get a quick start to allow it to be released to users for feedback as well as it's adaptability and accessibility to middleware.
+- Express is a quick framework of Nodejs and was used for a quick start so that the app could get released to users as soon as possible for feedback as well as it's adaptability and accessibility to middleware.
 - PostgreSQl was used for scalibility  and built in features for data integrity and fault tolerant at any dataset size.
 - Knex was used as our query builder as it couples with Express nodejs well and would allow for quick deployment to amp up the release of app to users for feedback.
 
