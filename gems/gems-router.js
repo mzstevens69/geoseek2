@@ -98,7 +98,7 @@ router.put("/:id", (req, res) => {
     .catch(err => {
       res.status(500).json( err,{ error: `error updating gem ${id}` });
     });
-});
+}); 
 
 router.post("/findNearby", (req, res) => {
   console.log(req.body);

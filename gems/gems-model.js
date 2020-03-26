@@ -109,7 +109,7 @@ async function updateGem(id, updated) {
   return await db("gems")
     .where("id", id)
     .update(updated)
-}
+} 
 
 function deleteGem(id) {
   return db("gems")
