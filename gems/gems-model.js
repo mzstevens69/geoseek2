@@ -105,13 +105,10 @@ async function findGemsByDistance ( long, lat, threshold ) {
 
 function findGemsByFilter() {}
 
-function updateGem(id, updated) {
-  return db("gems")
+async function updateGem(id, updated) {
+  return await db("gems")
     .where("id", id)
     .update(updated)
-    .then(() => {
-      return db("gems").where("id", id);
-    });
 }
 
 function deleteGem(id) {
