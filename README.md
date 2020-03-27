@@ -1,40 +1,28 @@
-
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8651f9cbb6925a1a2baa/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/geoseek-be/test_coverage)
 
 # API Documentation
 
-## 1️⃣ Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
+## Backend delpoyed at 😈HEROKU (https://geoseek-be.herokuapp.com/) <br>
 
 ## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm i** to install all required dependencies
+- **npm run server** to start the local server
+- **npm test** to start server using testing environment
 
-### Backend framework goes here
+### Backend framework
 
-🚫 Why did you choose this framework?
-
--    Point One
--    Point Two
--    Point Three
--    Point Four
+- Express is a quick framework of Nodejs and was used for a quick start so that the app could get released to users as soon as possible for feedback as well as it's adaptability and accessibility to middleware.
+- PostgreSQl was used for scalibility  and built in features for data integrity and fault tolerant at any dataset size.
+- Knex was used as our query builder as it couples with Express nodejs well and would allow for quick deployment to amp up the release of app to users for feedback.
 
 ## Endpoints
 
-### Use before all Endpoints  🤡 (https://geoseek-be.herokuapp.com/) 🤡
+### Use before all Endpoints   (https://geoseek-be.herokuapp.com/) 
 
 #### User Routes
 
@@ -42,9 +30,9 @@ To get the server running locally:
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
 | POST    | `/api/users/register`        | all guests/users           | Creates a new user, id auto increments               |
 | POST    | `/api/users/login`    | users with a created account | Expects a user object to compare with database             |
-| GET    | `/api/users`        | all guests/users | Returns a list of all users' id and usernames.                    |
-| GET   | `/api/users/:id` | all guests/users                | Returns the user with the specified id |
-| DELETE | `/api/users/:userId`        | all guests/users | Deletes the user with the specified id                                          |
+| GET    | `/api/users`        | users | Returns a list of all users' id and usernames.                    |
+| GET   | `/api/users/:id` | users                | Returns the user with the specified id |
+| DELETE | `/api/users/:userId`        | users | Deletes the user with the specified id                                          |
 
 #### Gem Routes
 
@@ -53,18 +41,21 @@ To get the server running locally:
 | POST    | `/api/gems` | all guests/users      | Creates a new gem |
 | POST    | `/api/gems/findNearby` | all guests/users      | Finds Gems near you accepting a Longitude, Latitude and Threshold |
 | GET    | `/api/gems` | all guests/users         | Returns a list of all the gems             |
-| GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id                      |
-| PUT | `/api/gems/:id` | all guests/users         | Expects an id along with a changes object.  Updates gem with specified id                      |
-| DELETE | `/api/gems/:id` | all guests/users         | Deletes the gem with the specified id                      |
+| GET | `/api/gems/:id` | all guests/users         | Returns a gem with the specified id  
+| GET | `/api/gems/byUser/:id` | users         | Returns a gem with the specified users id                    |
+| PUT | `/api/gems/:id` | users         | Expects an id along with a changed object.  Updates gem with specified id                      |
+| DELETE | `/api/gems/:id` | users         | Deletes the gem with the specified id                      |
 
 #### Completed Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| POST    | `/api/completed` | all guests/users      | Marks a gem as completed, expects a completed object |
-| GET    | `/api/completed` | all guests/users         | Returns a list of all the completed gems             |
-| GET | `/api/completed/:id` | all guests/users         | Returns a completed gem with the specified id                      |
-| DELETE | `/api/completed/:id` | all guests/users         | Deletes the completed gem with the specified id                      |
+| POST    | `/api/completed` | users must be logged in     | Marks a gem as completed, expects a completed object |
+| GET    | `/api/completed` | users must be logged in        | Returns a list of all the completed gems             |
+| GET | `/api/completed/:id` | users must be logged in        | Returns a completed gem with the specified id                      |
+ GET | `/api//completedByUser/:id` | users  must be logged in       | Returns a completed gems by user id                       |
+  GET | `/api/completed/completedByGemId/:id` | users must be logged in        | Returns  completed gems by Gem id                      |
+| DELETE | `/api/completed/:id` | users must be logged in        | Deletes the completed gem with the specified id                      |
 
 #### Photo Routes
 
@@ -82,135 +73,157 @@ To get the server running locally:
 
 ---
 
+```{
+    id: auto incrementing
+    username: STRING
+    email: STRING
+    password: STRING
+  
 ```
-{
-  id: auto incementing
-  username: STRING
-  email: STRING
-  password: STRING
-}
-```
-
-
 
 ## Gems
 
 ---
 
-```
-{
-  id: auto incrementing
-  created_by_user: INTEGER
-  longitude: FLOAT
-  latitude: FLOAT
-  difficulty: INTEGER
-  description: TEXT
-}
+```{
+    id: auto incrementing
+    created_by_user: INTEGER
+    longitude: FLOAT
+    latitude: FLOAT
+    difficulty: INTEGER
+    description: TEXT
+  
 ```
 
 ## Completed
 
 ---
 
-```
-{
-  id: auto incrementing
-  gem_id: INTEGER
-  completed_at: timestamped
-  completed_by: INTEGER
-  difficulty: INTEGER
-  comments: TEXT
-}
+```{
+    id: auto incrementing
+    gem_id: INTEGER
+    completed_at: timestamped
+    completed_by: INTEGER
+    difficulty: INTEGER
+    comments: TEXT
+  
 ```
 
 ## Photo Clues
 
 ---
 
+```{
+      id: auto incrementing
+      name: STRING
+      description: STRING
+      gem_id: INTEGER
+      photo_url: STRING
+  
 ```
-{
-  id: auto incrementing
-  name: STRING
-  description: STRING
-  gem_id: INTEGER
-  photo_url: STRING
-}
+
+# Information About Constraints
+
+```{
+    USERS
+      username: is required and unique
+      email: is required
+      password: is required
+
+    GEMS
+      title: is required 255 max characters
+      createdByUser: is required and foreign key to users table
+      longitude: is required
+      latitude: is required
+      difficulty: is required
+      description: 150 max characters
+
+    PHOTO CLUES
+      name: is not required 255 max characters
+      description: is not required 255 max characters
+      gemId: is required foreign key to gems
+      photoUrl: is required
+
+    COMPLETED GEM
+      gemId: is required foreign key to gems
+      completedAt: adds timestamp
+      completedBy:  is required foreign key to users
+      comments: not required 150 max characters
 ```
 
-# Information About Constraints 
+## Actions
 
-        USERS
-        username: is required and unique       
-        email: is required
-        password: is required
-    
-        GEMS
-        title: is required 255 max characters    
-        createdByUser: is required and foreign key to users table
-        longitude: is required
-        latitude: is required
-        difficulty: is required
-        description: 150 max characters
-        
-    
-        PHOTO CLUES
-        name: is not required 255 max characters
-        description: is not required 255 max characters     
-        gemId: is required foreign key to gems
-        photoUrl: is required
-    
-        COMPLETED GEM
-        gemId: is required foreign key to gems
-        completedAt: adds timestamp
-        completedBy:  is required foreign key to users
-        comments: not required 150 max characters
+`find()` --> Returns User with Id, username, email
 
-## 2️⃣ Actions
+`findById(id)` --> Returns a single user by Id
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+`add()` --> Returns the created user
 
-`getUsers()` -> Returns all Users
+`findBy(filter)` --> Update an organization by Id
 
-`getOrg(orgId)` -> Returns a single organization by ID
-
-`addOrg(org)` -> Returns the created org
-
-`updateOrg(orgId)` -> Update an organization by ID
-
-`deleteOrg(orgId)` -> Delete an organization by ID
+`remove(id)` --> Delete a user by Id
 <br>
 <br>
 <br>
 
-`getUsers(Id)` -> if no param all users
+`addGem()` --> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+`updateGem(Id)` --> Passed an object it updates object by it's Id
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`findGems()` --> Returns all Gems
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`findById(Id)` --> Finds a gem by the Id
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`findGemsByUserId()` --> Returns gems that were created by the User Id.
 
-## 3️⃣ Environment Variables
+`findGemsByDistance()` --> Returns gems that are closest to user by a threshold
+
+`deleteGem(Id)` --> deletes gem
+<br>
+<br>
+<br>
+
+`insert()` --> add a completed gem
+
+`findById(Id)` --> finds a completed by completed Id
+
+`getCompleted()` --> all completed in the completed table
+
+`getCompletedByUser(Id)` --> Gets Completed Gems by specific User
+
+`getCompletedByGemId(Id)` --> Gets Completed Gems by Id
+
+`remove(Id)` --> deletes completed gem
+
+<br>
+<br>
+<br>
+
+`findPhotoByGem(Id)` --> Returns photo by gem Id
+
+`createPhoto()` --> adds a photo to a gem
+
+`findAll()` --> returns all photos in the table
+
+`editPhoto()` --> Passed an object it updates object by it's Id
+
+`destroy()` --> deletes a photo
+
+## Environment Variables
 
 In order for the app to function correctly, the user ✏️ must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    * Postgres local deployed .env variables database.
+```{
       HOST
       DATABASE
       USER
-      PASSWORD 
+      PASSWORD
+      NODE_ENV - set to "development" until ready for "production"
 
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
-    
+```
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -220,10 +233,11 @@ Please note we have a [code of conduct](./code_of_conduct.md). Please follow it 
 ### Issue/Bug Request
 
  **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
@@ -249,7 +263,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
-
-Making a change.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/geoseek-fe/blob/master/README.md) for details on the fronend of our project.
+See [IOS Documentation](https://github.com/Lambda-School-Labs/geoseek-iOS/blob/master/README.md) for details on the IOS project.

@@ -16,7 +16,8 @@ server.use("/api/photo", photoRouter);
 server.use("/api/completed", completedRouter);
 
 server.get("/", (req, res) => {
-  res.send("Server Running");
+  res.send("Server Running")
+    
 });
 
 module.exports = server;

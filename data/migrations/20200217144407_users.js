@@ -11,14 +11,14 @@ exports.up = function(knex) {
     })
     .createTable("gems", tbl => {
       tbl.increments();
-      tbl.string("title");
-      //.notNullable()
-      // tbl.integer('created_by_user')
-      //.unsigned()
-      // .notNullable()
-      //.references('id')
-      //.inTable('users')
-      //.onDelete('CASCADE')
+      tbl.string("title")
+      .notNullable()
+      tbl.integer('created_by_user')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
       tbl.float("longitude").notNullable();
       tbl.float("latitude").notNullable();
       tbl.integer("difficulty");
@@ -45,13 +45,13 @@ exports.up = function(knex) {
         .references("id")
         .inTable("gems")
         .onDelete("CASCADE");
-      tbl.timestamp("completed_at").defaultTo(knex.fn.now());
-      // tbl.integer('completed_by')
-      // .unsigned()
-      // .notNullable()
-      // .references('id')
-      // .inTable('users')
-      // .onDelete('CASCADE')
+      tbl.timestamp("completed_at").defaultTo(knex.fn.now())
+      tbl.integer('completed_by')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
       tbl.text("comments", 150);
     });
 };
@@ -60,7 +60,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("completed")
     .dropTableIfExists("photo_clues")
-    .dropTableIfExists("gems")
-    .dropTableIfExists("users");
+    .dropTableIfExists("users")
+    .dropTableIfExists("gems");
 };
 // changes

@@ -6,7 +6,8 @@ exports.seed = function(knex) {
       {
         id: 1,
         title: "test1",
-        longitude: 118.4695,
+        created_by_user: 1,
+        longitude: -118.4695,
         latitude: 33.985,
         difficulty: 1,
         description: "Venice Beach, CA"
@@ -14,7 +15,8 @@ exports.seed = function(knex) {
       {
         id: 2,
         title: "test2",
-        longitude: 90.1848,
+        created_by_user: 2,
+        longitude: -90.1848,
         latitude: 38.6247,
         difficulty: 1,
         description: "St Louis Arch, MO"
@@ -22,11 +24,21 @@ exports.seed = function(knex) {
       {
         id: 3,
         title: "test3",
-        longitude: 77.0365,
+        created_by_user: 2,
+        longitude: -77.0365,
         latitude: 38.8977,
         difficulty: 1,
         description: "The White House, washington dc"
-      }
+      },
+      {
+        id: 4,
+        title: "test2",
+        created_by_user: 2,
+        longitude: -90.1848,
+        latitude: 38.6247,
+        difficulty: 1,
+        description: "St Louis Arch, MO"
+      },
     ]);
   });
 };
